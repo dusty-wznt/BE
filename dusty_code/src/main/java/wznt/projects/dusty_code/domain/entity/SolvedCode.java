@@ -16,7 +16,6 @@ public class SolvedCode {
     @JoinColumn(name = "solvedProblem")
     private SolvedProblems solvedProblem;
 
-    private LocalDate solvedDate;
 
     private String codeSentences;
 }
