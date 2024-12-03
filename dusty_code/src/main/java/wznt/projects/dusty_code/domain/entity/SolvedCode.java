@@ -1,19 +1,22 @@
 package wznt.projects.dusty_code.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
 
 public class SolvedCode {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "problemId")
-    private Long problemId;
 
-    private String problemTitle;
+    // 사용 보류
 
-    private String problemURL;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "solvedCodeId")
+    private Long solvedCodeId;
 
-    private String problemType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "solvedProblem")
+    private SolvedProblems solvedProblem;
+
+    private LocalDate solvedDate;
+
+    private String codeSentences;
 }
