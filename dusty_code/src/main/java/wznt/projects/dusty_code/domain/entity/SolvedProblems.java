@@ -1,12 +1,15 @@
 package wznt.projects.dusty_code.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
-
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class SolvedProblems {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,5 +20,7 @@ public class SolvedProblems {
     private String problemType;
 
     private LocalDate solvedDate;
+
+    private String goodToKnow;
 
 }
