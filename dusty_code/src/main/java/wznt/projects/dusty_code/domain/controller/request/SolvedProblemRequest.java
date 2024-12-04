@@ -1,13 +1,18 @@
 package wznt.projects.dusty_code.domain.controller.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonGetter;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import wznt.projects.dusty_code.domain.entity.SolvedProblems;
 import wznt.projects.dusty_code.domain.service.dto.solvedProblems.SolvedProblemDto;
 
 import java.time.LocalDate;
 
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SolvedProblemRequest {
 
     private String problemTitle;
@@ -21,10 +26,10 @@ public class SolvedProblemRequest {
 
     public SolvedProblemDto toDto(){
         return SolvedProblemDto.builder()
-                .problemTitle(this.problemTitle)
-                .problemURL(this.problemURL)
-                .solvedDate(this.solvedDate)
-                .problemType(this.problemType)
-                .goodToKnow(this.goodToKnow).build();
+                .problemTitle(problemTitle)
+                .problemURL(problemURL)
+                .solvedDate(solvedDate)
+                .problemType(problemType)
+                .goodToKnow(goodToKnow).build();
     }
 }
