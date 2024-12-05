@@ -1,4 +1,4 @@
-name: EC@ deploy
+name: EC2 deploy
 
 on:
   push:
@@ -13,3 +13,5 @@ jobs:
     - name: Run Tests
       run:
         echo "hello world"
+        echo "{{ secrets.EC2_PRIVATE_SECRET }}" > ec2-private-key.pem
+        chmod 400 ec2-private-key.pem
