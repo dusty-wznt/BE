@@ -17,4 +17,5 @@ jobs:
         chmod 400 ec2-private-key.pem
         ssh -o StrictHostKeyChecking=no -i ec2-private-key.pem ubuntu@ec2-3-34-122-10.ap-northeast-2.compute.amazonaws.com '
           date > current_time.txt
+          echo ls
         '
