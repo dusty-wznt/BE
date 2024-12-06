@@ -43,4 +43,13 @@ jobs:
     - name: Verify Java Installation
       run: |
         java --version
+    - name: Get Files
+      run: |
+        if [ -d $HOME/BE ]; then
+          cd BE
+          git pull origin main
+        else
+          git clone https://github.com/dusty-wznt/BE.git
+          cd BE
+        fi
   
