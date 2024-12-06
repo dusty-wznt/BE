@@ -46,5 +46,8 @@ jobs:
     - name: Delete clone folders
       run: 
         git clone https://github.com/dusty-wznt/BE.git
+        pwd
+        ls
+        
 
   
