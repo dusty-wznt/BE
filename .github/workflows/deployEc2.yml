@@ -46,8 +46,9 @@ jobs:
     - name: Delete clone folders
       run: |
         if [ -d $HOME/BE ]; then
-          rm -rf BE
+          rm -rf $HOME/BE
         fi
+        cd $HOME
         ls
 
   
