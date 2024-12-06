@@ -20,7 +20,7 @@ jobs:
         '
     - name: Check if Java is installed
       run: |
-          if ! java --version &>/dev/null; then
+          if ! command -v java &>/dev/null; then
             echo "Java not found. Installing OpenJDK 17..."
             sudo apt update
             sudo apt install -y openjdk-17-jdk-headless
