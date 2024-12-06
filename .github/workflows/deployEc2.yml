@@ -46,7 +46,9 @@ jobs:
             git clone https://github.com/dusty-wznt/BE.git
             cd BE
           fi
-          
+
+          cd dusty_code
+          ./gradlew build
         '
 
         
