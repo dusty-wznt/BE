@@ -10,12 +10,37 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Run Tests
+    - name: Connect to Ec2
       run: |
         echo "hello world"
         echo "${{ secrets.EC2_PRIVATE_SECRET }}" > ec2-private-key.pem
         chmod 400 ec2-private-key.pem
         ssh -o StrictHostKeyChecking=no -i ec2-private-key.pem ubuntu@ec2-3-34-122-10.ap-northeast-2.compute.amazonaws.com '
-          date > current_time.txt
-          echo ls
+          echo Welcom to Dusty!
         '
+    - name: Check if Java is installed
+      run: |
+          if ! java --version &>/dev/null; then
+            echo "Java not found. Installing OpenJDK 17..."
+            sudo apt update
+            sudo apt install -y openjdk-17-jdk-headless
+          else
+            echo "Java is already installed."
+          fi
+          
+    - name: Configure JAVA_HOME if not set
+      run: |
+        if [ -z "$JAVA_HOME" ]; then
+          echo "JAVA_HOME is not set. Configuring..."
+          JAVA_PATH=$(which javac)
+          JDK_PATH=$(readlink -f "$JAVA_PATH" | sed 's:/bin/javac::')
+          echo "export JAVA_HOME=$JDK_PATH" | sudo tee -a /etc/profile
+          echo "export PATH=\$JAVA_HOME/bin:\$PATH" | sudo tee -a /etc/profile
+          source /etc/profile
+        else
+          echo $JAVA_HOME
+        fi
+    - name: Verify Java Installation
+      run: |
+        java --version
+  
