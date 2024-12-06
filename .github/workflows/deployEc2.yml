@@ -44,7 +44,7 @@ jobs:
       run: |
         java --version
     - name: Delete clone folders
-      run: 
+      run: |
         git clone https://github.com/dusty-wznt/BE.git
         pwd
         ls
