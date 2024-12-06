@@ -46,10 +46,14 @@ jobs:
     - name: Get Files
       run: |
         if [ -d $HOME/BE ]; then
+          pwd
           cd BE
+          pwd
           git pull origin main
         else
+          pwd
           git clone https://github.com/dusty-wznt/BE.git
+          ls
           cd BE
         fi
   
