@@ -17,9 +17,7 @@ jobs:
         chmod 400 ec2-private-key.pem
         ssh -o StrictHostKeyChecking=no -i ec2-private-key.pem ubuntu@ec2-54-180-86-25.ap-northeast-2.compute.amazonaws.com '
           echo Welcom to Dusty!
-        '
-    - name: Check if Java is installed
-      run: |
+
           if ! command -v java &>/dev/null; then
             echo "Java not found. Installing OpenJDK 17..."
             sudo apt update
@@ -27,27 +25,30 @@ jobs:
           else
             echo "Java is already installed."
           fi
+
+          if [ -z "$JAVA_HOME" ]; then
+            echo "JAVA_HOME is not set. Configuring..."
+            JAVA_PATH=$(which javac)
+            JDK_PATH=$(readlink -f "$JAVA_PATH" | sed 's:/bin/javac::')
+            echo "export JAVA_HOME=$JDK_PATH" | sudo tee -a /etc/profile
+            echo "export PATH=\$JAVA_HOME/bin:\$PATH" | sudo tee -a /etc/profile
+            source /etc/profile
+          else
+            echo $JAVA_HOME
+          fi
+
+          java --version
+
+          if [ -d $HOME/BE ]; then
+            cd BE
+            git pull origin main
+          else
+            git clone https://github.com/dusty-wznt/BE.git
+            cd BE
+          fi
           
-    - name: Configure JAVA_HOME if not set
-      run: |
-        if [ -z "$JAVA_HOME" ]; then
-          echo "JAVA_HOME is not set. Configuring..."
-          JAVA_PATH=$(which javac)
-          JDK_PATH=$(readlink -f "$JAVA_PATH" | sed 's:/bin/javac::')
-          echo "export JAVA_HOME=$JDK_PATH" | sudo tee -a /etc/profile
-          echo "export PATH=\$JAVA_HOME/bin:\$PATH" | sudo tee -a /etc/profile
-          source /etc/profile
-        else
-          echo $JAVA_HOME
-        fi
-    - name: Verify Java Installation
-      run: |
-        java --version
-    - name: Delete clone folders
-      run: |
-        git clone https://github.com/dusty-wznt/BE.git
-        pwd
-        ls
+        '
+
         
 
   
