@@ -45,15 +45,17 @@ jobs:
         java --version
     - name: Get Files
       run: |
-        if [ -d $HOME/BE ]; then
-          pwd
+        if [ -d /home/ubuntu/BE ]; then
           cd BE
-          pwd
           git pull origin main
+          cd dusty_code
+          pwd
         else
           pwd
           git clone https://github.com/dusty-wznt/BE.git
           ls
           cd BE
+          cd dusty_code
+          pwd
         fi
   
