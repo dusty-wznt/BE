@@ -44,11 +44,7 @@ jobs:
       run: |
         java --version
     - name: Delete clone folders
-      run: |
-        if [ -d $HOME/BE ]; then
-          rm -rf $HOME/BE
-        fi
-        cd $HOME
-        ls
+      run: 
+        git clone https://github.com/dusty-wznt/BE.git
 
   
